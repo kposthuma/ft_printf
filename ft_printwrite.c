@@ -6,31 +6,31 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/19 12:15:35 by kposthum      #+#    #+#                 */
-/*   Updated: 2023/02/02 13:01:43 by kposthum      ########   odam.nl         */
+/*   Updated: 2023/04/04 13:57:55 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"ft_printf.h"
 
-int	ft_putchar(char c)
+int	putchar_printf(char c)
 {
 	write(1, &c, 1);
 	return (1);
 }
 
-int	ft_putstr(char *s)
+int	putstr_printf(char *s)
 {
 	int	i;
 
 	i = 0;
 	if (!s)
-		return (ft_putstr("(null)"), 6);
+		return (putstr_printf("(null)"), 6);
 	while (s[i])
-		i += ft_putchar(s[i]);
+		i += putchar_printf(s[i]);
 	return (i);
 }
 
-int	ft_putnbr_(unsigned int n)
+int	putnbr_printf(unsigned int n)
 {
 	int				len;
 	unsigned int	t;
@@ -45,11 +45,11 @@ int	ft_putnbr_(unsigned int n)
 		len++;
 	}	
 	if (n < 10)
-		ft_putchar(n + 48);
+		putchar_printf(n + 48);
 	else
 	{
-		ft_putnbr_(n / 10);
-		ft_putnbr_(n % 10);
+		putnbr_printf(n / 10);
+		putnbr_printf(n % 10);
 	}
 	return (len);
 }
@@ -57,13 +57,13 @@ int	ft_putnbr_(unsigned int n)
 int	ft_printnbr(int n)
 {
 	if (n == -2147483648)
-		return (ft_putstr("-2147483648"));
+		return (putstr_printf("-2147483648"));
 	if (n < 0)
 	{
 		n = -n;
-		ft_putchar('-');
-		return (ft_putnbr_((unsigned int)n) + 1);
+		putchar_printf('-');
+		return (putnbr_printf((unsigned int)n) + 1);
 	}
 	else
-		return (ft_putnbr_((unsigned int)n));
+		return (putnbr_printf((unsigned int)n));
 }
